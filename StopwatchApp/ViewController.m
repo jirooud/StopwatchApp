@@ -40,27 +40,18 @@
     [self.view addSubview:timeLabel];
 
     //スタートボタン
-    UIButton *startButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    startButton.frame = CGRectMake(0, 0, 100, 50);
-    startButton.center = CGPointMake(160, 400);
+    UIButton *startButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [startButton setTitle:@"スタート" forState:UIControlStateNormal];
-    [startButton addTarget:self action:@selector(timerStart:)
-          forControlEvents:UIControlEventTouchUpInside];
+    [startButton addTarget:self action:@selector(timerStart:) forControlEvents:UIControlEventTouchDown];
+    startButton.frame = CGRectMake(0, 0, 100, 50);
+    startButton.center = CGPointMake(160, 420);
     [self.view addSubview:startButton];
     
-    //ストップボタン
-    UIButton *stopButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    stopButton.frame = CGRectMake(0, 0, 100, 50);
-    stopButton.center = CGPointMake(160, 450);
-    [stopButton setTitle:@"停止" forState:UIControlStateNormal];
-    [stopButton addTarget:self action:@selector(timerStop:)
-         forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:stopButton];
     
     //リセットボタン
-    UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeCustom];
     resetButton.frame = CGRectMake(0, 0, 100, 50);
-    resetButton.center = CGPointMake(160, 500);
+    resetButton.center = CGPointMake(160, 480);
     [resetButton setTitle:@"リセット" forState:UIControlStateNormal];
     [resetButton addTarget:self action:@selector(timerReset:)
          forControlEvents:UIControlEventTouchUpInside];
@@ -82,17 +73,14 @@
     timeLabel.text = [NSString stringWithFormat:@"%02ld:%02ld", (long)minute,(long)second];
 }
 
-//スタートボタンを押した時
--(void)timerStart:(id)sender{
+//スイッチ切り替え
+-(void)timerStart:(UIButton *)sender{
     if (timer == nil){
-    startDate = [NSDate date];
-        timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tick:)userInfo:nil repeats:YES];
-    }
-}
-
-//ストップボタンを押した時
--(void)timerStop:(id)sender{
-    if (timer != nil){
+        [sender setTitle:@"ストップ" forState:UIControlStateNormal];
+        startDate = [NSDate date];
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(tick:)userInfo:nil repeats:YES];
+    }else{
+        [sender setTitle:@"スタート" forState:UIControlStateNormal];
         NSInteger nawInterval = [[NSDate date]timeIntervalSinceDate:startDate];
         totalInterval += nawInterval;
         [timer invalidate];
