@@ -30,28 +30,30 @@
     backgroundView.image = [UIImage imageNamed:@"sample1.png"];
     [self.view addSubview:backgroundView];
     
+    //画面サイズ取得
+    CGRect screenSize = [UIScreen mainScreen].bounds;
+    
     //ラベル
     timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
-    timeLabel.center = CGPointMake(160, 284);
+    timeLabel.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height / 2);
     timeLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:48];
     timeLabel.text = @"00:00";
     timeLabel.textAlignment = NSTextAlignmentCenter;
     timeLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:timeLabel];
-
+    
     //スタートボタン
     UIButton *startButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [startButton setTitle:@"スタート" forState:UIControlStateNormal];
     [startButton addTarget:self action:@selector(timerStart:) forControlEvents:UIControlEventTouchDown];
     startButton.frame = CGRectMake(0, 0, 100, 50);
-    startButton.center = CGPointMake(160, 420);
+    startButton.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height - 90);
     [self.view addSubview:startButton];
-    
     
     //リセットボタン
     UIButton *resetButton = [UIButton buttonWithType:UIButtonTypeCustom];
     resetButton.frame = CGRectMake(0, 0, 100, 50);
-    resetButton.center = CGPointMake(160, 480);
+    resetButton.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height - 40);
     [resetButton setTitle:@"リセット" forState:UIControlStateNormal];
     [resetButton addTarget:self action:@selector(timerReset:)
          forControlEvents:UIControlEventTouchUpInside];
@@ -100,5 +102,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//再提出
 
 @end
