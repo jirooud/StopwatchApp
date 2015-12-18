@@ -36,7 +36,7 @@
     //ラベル
     timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 300, 100)];
     timeLabel.center = CGPointMake(screenSize.size.width / 2, screenSize.size.height / 2);
-    timeLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:48];
+    timeLabel.font = [UIFont boldSystemFontOfSize:48];
     timeLabel.text = @"00:00";
     timeLabel.textAlignment = NSTextAlignmentCenter;
     timeLabel.backgroundColor = [UIColor clearColor];
